@@ -17,7 +17,7 @@ body {
 }
 
 textarea {
-  background: transparent;
+  background: rgba(1,1,1,0.1);
   border: none;
   resize: none;
   color: #000000;
@@ -108,8 +108,11 @@ textarea {
 }
 
 @media only screen and (max-width:576px) {
-  .row-content {
+ .row-content {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+  }
+  ul p, ul button {
+    margin-top: 10px;
   }
 }
