@@ -13,14 +13,15 @@ timesArray = [['9AM', 'am9'], ['10AM', 'am10'], ['11AM', 'am11'], ['12PM', 'pm12
 
 const timeBlockSetup = (item) => {
     // set up html for blocks with changing id and time
-   timeblockContainer.append(`<div class="row time-block" id="${item[1]}">
-   <div class="col-md-2 hour">
+   timeblockContainer.append(`
+   <div class="row time-block" id="${item[1]}">
+   <div class="col-md-2 col-sm-3 col-12 hour">
      <h3>${item[0]}</h3>
    </div>
-   <div class="col-md-9 row-content">
+   <div class="col-md-9 col-sm-7 col-10 row-content">
      <textarea></textarea>
    </div>
-   <div class="col-md-1 save-btn">
+   <div class="col-md-1 col-sm-2 col-2 save-btn">
      <i class="fa fa-solid fa-check"></i>
    </div>
  </div>`)
@@ -42,3 +43,4 @@ timeBlockArray.forEach((item) => {
     }
 }); 
 
+// store each event
