@@ -18,8 +18,8 @@ const timeBlockSetup = (item) => {
    <div class="col-md-2 col-sm-3 col-12 hour">
      <h3>${item[0]}</h3>
    </div>
-   <div class="col-md-9 col-sm-7 col-10 row-content flex-center">
-     <ul></ul>
+   <div class="col-md-9 col-sm-7 col-10 row-content flex-column">
+     <ul class='flex-center'></ul>
      <textarea></textarea>
    </div>
    <div class="col-md-1 col-sm-2 col-2 save-btn flex-center">
@@ -52,7 +52,11 @@ displayStoredEvents = () => {
         if (!newContent) {
             return;
         } else {
-           $(item).find('ul').html('<li>' + localStorage.getItem(`${id}task`) + '</li>')
+           $(item).find('ul').html(`<li class="flex-center">
+           <p>` + localStorage.getItem(`${id}task`) + `</p>
+           <button class="btn btn-danger"><i class="fa fa-check">
+           </i></button>
+           </li>`)
         }
     })
 }
