@@ -30,9 +30,9 @@ const timeBlockSetup = (item) => {
 timesArray.forEach(timeBlockSetup)
 
   // set background color
-const timeBlockArray = $('.time-block').toArray()
+const timeBlock = $('.time-block')
 
-timeBlockArray.forEach((item) => {
+timeBlock.each(((i, item) => {
     const thisTime = $(item).find('h3').text();
     const currentHour = moment().format('hA'); 
     if (currentHour === thisTime) {
@@ -42,7 +42,7 @@ timeBlockArray.forEach((item) => {
     } else {
         $(item).find('.row-content').addClass('future')
     }
-}); 
+}))
 
 // display stored tasks
 const listArr = $('ul');
