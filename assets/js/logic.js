@@ -55,12 +55,11 @@ displayStoredEvents = () => {
                 return;
             } else {
                 let taskArray = Object.values(JSON.parse(newContent))
-                console.log(taskArray)
                 taskArray.forEach(item => {
                     listDiv.append(`<li class="flex-center">
                     <p>${item}</p>
-                    <button class="btn btn-danger"><i class="fa fa-check">
-                    </i></button>
+                    <button class="btn btn-danger">
+                    </button>
                     </li>`)
                 })
             }
@@ -71,21 +70,23 @@ displayStoredEvents();
 
 // store each event
 const saveBtn = $('.save-btn'); 
-
-saveBtn.on('click', event => {
+saveFunc = (event) => {
     let textArea = $(event.target).parent().find('textarea')
     let textBoxContent = textArea.val()
     let id = $(event.target).parent().attr('id'); 
 
-    let localData = localStorage.getItem(`${id}task`)
+    if (!textBoxContent) {
+        return; 
+    } else {
+        let localData = localStorage.getItem(`${id}task`)
     if (!localData || localData === {}) {
         let newObj = {'event1': textBoxContent}; 
         localStorage.setItem(`${id}task`, JSON.stringify(newObj)); 
     } else {
-        console.log(localData);
         let newObj = JSON.parse(localData)
-        console.log(newObj)
-        if (!newObj.event2) {
+        if (!newObj.event1) {
+            newObj.event1 = textBoxContent; 
+           } else if (!newObj.event2) {
          newObj.event2 = textBoxContent; 
         } else if (!newObj.event3) {
             newObj.event3 = textBoxContent; 
@@ -101,4 +102,25 @@ saveBtn.on('click', event => {
     }
     displayStoredEvents(); 
     textArea.val(''); 
+    }
+}
+saveBtn.on('click', (event) => {saveFunc(event);}); 
+
+// delete finished events
+const unorderedLists = $('ul')
+
+unorderedLists.on('click', event => {
+    let id = $(event.target).parent().parent().parent().parent().attr('id')
+    let listContent = event.target.closest('li').querySelector('p').textContent
+    let localData = JSON.parse(localStorage.getItem(`${id}task`));
+    let valueArr = Object.entries(localData)
+    valueArr.forEach((item) => {
+        if (item[1] === listContent) {
+            let key = item[0];
+            delete localData[key]; 
+        }
+    })
+   
+    localStorage.setItem(`${id}task`, JSON.stringify(localData)); 
+    displayStoredEvents(); 
 })

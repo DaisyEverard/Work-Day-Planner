@@ -92,8 +92,7 @@ ul p, ul button {
 
 .fa-check {
   color: white;
-  margin-left: -7px; 
-  margin-top: -2px; 
+  pointer-events: none;
 }
 
 .save-btn {
