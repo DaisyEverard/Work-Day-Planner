@@ -45,18 +45,16 @@ timeBlock.each(((i, item) => {
 }))
 
 // display stored tasks
-const listArr = $('ul');
-
 displayStoredEvents = () => {
-  listArr.each((i, item) => {
-    let id = $(item).parent().parent().attr('id');
-    let newContent = localStorage.getItem(`${id}task`); 
-    if (!newContent) {
-        return;
-    } else {
-     $(item).html('<li>' + localStorage.getItem(`${id}task`) + '</li>'); 
-    }
-  })
+    timeBlock.each((i, item) => {
+        let id = $(item).attr('id')
+        let newContent = localStorage.getItem(`${id}task`);
+        if (!newContent) {
+            return;
+        } else {
+           $(item).find('ul').html('<li>' + localStorage.getItem(`${id}task`) + '</li>')
+        }
+    })
 }
 displayStoredEvents(); 
 
@@ -69,4 +67,5 @@ saveBtn.on('click', event => {
     console.log(id)
     localStorage.setItem(`${id}task`, textBoxContent); 
     displayStoredEvents(); 
+    $(item).find('textarea').empty()
 })
