@@ -19,7 +19,7 @@ const timeBlockSetup = (item) => {
      <h3>${item[0]}</h3>
    </div>
    <div class="col-md-9 col-sm-7 col-10 row-content flex-column">
-     <ul class='flex-center'></ul>
+     <ul></ul>
      <textarea></textarea>
    </div>
    <div class="col-md-1 col-sm-2 col-2 save-btn flex-center">
@@ -46,20 +46,27 @@ timeBlock.each(((i, item) => {
 
 // display stored tasks
 displayStoredEvents = () => {
-    timeBlock.each((i, item) => {
-        let id = $(item).attr('id')
-        let newContent = localStorage.getItem(`${id}task`);
-        if (!newContent) {
-            return;
-        } else {
-           $(item).find('ul').html(`<li class="flex-center">
-           <p>` + localStorage.getItem(`${id}task`) + `</p>
-           <button class="btn btn-danger"><i class="fa fa-check">
-           </i></button>
-           </li>`)
-        }
-    })
-}
+        timeBlock.each((i, item) => {
+            let listDiv = $(item).find('ul')
+            $(listDiv).empty()
+            let id = $(item).attr('id')
+            let newContent = localStorage.getItem(`${id}task`);
+            if (!newContent) {
+                return;
+            } else {
+                let taskArray = Object.values(JSON.parse(newContent))
+                console.log(taskArray)
+                taskArray.forEach(item => {
+                    listDiv.append(`<li class="flex-center">
+                    <p>${item}</p>
+                    <button class="btn btn-danger"><i class="fa fa-check">
+                    </i></button>
+                    </li>`)
+                })
+            }
+        })
+    }
+
 displayStoredEvents(); 
 
 // store each event
@@ -67,10 +74,31 @@ const saveBtn = $('.save-btn');
 
 saveBtn.on('click', event => {
     let textArea = $(event.target).parent().find('textarea')
-    let textBoxContent = $(textArea).val()
+    let textBoxContent = textArea.val()
     let id = $(event.target).parent().attr('id'); 
 
-    localStorage.setItem(`${id}task`, textBoxContent); 
+    let localData = localStorage.getItem(`${id}task`)
+    if (!localData || localData === {}) {
+        let newObj = {'event1': textBoxContent}; 
+        localStorage.setItem(`${id}task`, JSON.stringify(newObj)); 
+    } else {
+        console.log(localData);
+        let newObj = JSON.parse(localData)
+        console.log(newObj)
+        if (!newObj.event2) {
+         newObj.event2 = textBoxContent; 
+        } else if (!newObj.event3) {
+            newObj.event3 = textBoxContent; 
+        } else if (!newObj.event4) {
+            newObj.event4 = textBoxContent; 
+        } else if (!newObj.event5) {
+            newObj.event5 = textBoxContent; 
+        } else {
+            alert('Sorry, Max 5 events per hour')
+            return; 
+        }   
+        localStorage.setItem(`${id}task`, JSON.stringify(newObj));
+    }
     displayStoredEvents(); 
-    $(textArea).val(''); 
+    textArea.val(''); 
 })
