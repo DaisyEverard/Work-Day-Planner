@@ -18,11 +18,11 @@ const timeBlockSetup = (item) => {
    <div class="col-md-2 col-sm-3 col-12 hour">
      <h3>${item[0]}</h3>
    </div>
-   <div class="col-md-9 col-sm-7 col-10 row-content">
+   <div class="col-md-9 col-sm-7 col-10 row-content flex-center">
      <ul></ul>
      <textarea></textarea>
    </div>
-   <div class="col-md-1 col-sm-2 col-2 save-btn">
+   <div class="col-md-1 col-sm-2 col-2 save-btn flex-center">
      <i class="fa fa-solid fa-check"></i>
    </div>
  </div>`)
@@ -62,10 +62,12 @@ displayStoredEvents();
 const saveBtn = $('.save-btn'); 
 
 saveBtn.on('click', event => {
-    let textBoxContent = $(event.target).parent().find('textarea').val()
-    let id = $(event.target).parent().attr('id')
-    console.log(id)
+    let textArea = $(event.target).parent().find('textarea')
+    let textBoxContent = $(textArea).val()
+    console.log(textBoxContent); 
+
+    let id = $(event.target).parent().attr('id'); 
     localStorage.setItem(`${id}task`, textBoxContent); 
     displayStoredEvents(); 
-    $(item).find('textarea').empty()
+    $(textArea).val(''); 
 })

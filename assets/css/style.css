@@ -4,6 +4,12 @@ body {
   line-height: 1;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 textarea {
   background: transparent;
   border: none;
@@ -48,9 +54,6 @@ textarea {
   height: 80px;
   width: 100%; 
   border-left: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .past {
@@ -76,9 +79,6 @@ textarea {
   color: white;
   height: 80px;
   width: 70px; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .save-btn:hover {
