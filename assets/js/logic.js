@@ -68,9 +68,8 @@ const saveBtn = $('.save-btn');
 saveBtn.on('click', event => {
     let textArea = $(event.target).parent().find('textarea')
     let textBoxContent = $(textArea).val()
-    console.log(textBoxContent); 
-
     let id = $(event.target).parent().attr('id'); 
+
     localStorage.setItem(`${id}task`, textBoxContent); 
     displayStoredEvents(); 
     $(textArea).val(''); 
