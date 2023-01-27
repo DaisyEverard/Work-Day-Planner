@@ -19,6 +19,7 @@ const timeBlockSetup = (item) => {
      <h3>${item[0]}</h3>
    </div>
    <div class="col-md-9 col-sm-7 col-10 row-content">
+     <ul></ul>
      <textarea></textarea>
    </div>
    <div class="col-md-1 col-sm-2 col-2 save-btn">
@@ -43,4 +44,29 @@ timeBlockArray.forEach((item) => {
     }
 }); 
 
+// display stored tasks
+const listArr = $('ul');
+
+displayStoredEvents = () => {
+  listArr.each((i, item) => {
+    let id = $(item).parent().parent().attr('id');
+    let newContent = localStorage.getItem(`${id}task`); 
+    if (!newContent) {
+        return;
+    } else {
+     $(item).html('<li>' + localStorage.getItem(`${id}task`) + '</li>'); 
+    }
+  })
+}
+displayStoredEvents(); 
+
 // store each event
+const saveBtn = $('.save-btn'); 
+
+saveBtn.on('click', event => {
+    let textBoxContent = $(event.target).parent().find('textarea').val()
+    let id = $(event.target).parent().attr('id')
+    console.log(id)
+    localStorage.setItem(`${id}task`, textBoxContent); 
+    displayStoredEvents(); 
+})
