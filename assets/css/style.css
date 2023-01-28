@@ -90,6 +90,13 @@ ul p, ul button {
   bottom: 7px;
 }
 
+.btn-danger p {
+  pointer-events: none;
+  color: white;
+  margin-top: -54px;
+  margin-left: -4.7px;
+}
+
 .fa-check {
   color: white;
   pointer-events: none;

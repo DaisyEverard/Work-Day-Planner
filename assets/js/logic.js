@@ -59,6 +59,7 @@ displayStoredEvents = () => {
                     listDiv.append(`<li class="flex-center">
                     <p>${item}</p>
                     <button class="btn btn-danger">
+                    <p>X<p>
                     </button>
                     </li>`)
                 })
