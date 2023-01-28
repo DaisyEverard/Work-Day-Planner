@@ -105,6 +105,7 @@ saveFunc = (event) => {
     textArea.val(''); 
     }
 }
+// add click listener to blue button
 saveBtn.on('click', (event) => {saveFunc(event);}); 
 
 // delete finished events
